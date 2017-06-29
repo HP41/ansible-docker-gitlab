@@ -5,7 +5,7 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.1
   platforms:
-     - name: Debian
+    - name: Debian
       versions:
         - stretch
         - jessie

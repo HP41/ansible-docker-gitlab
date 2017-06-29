@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    docker_gitlab_gitlab_rb_template: templates/gitlab.rb.j2
+    # docker_gitlab_runner_config_toml_template: templates/config.toml.j2
+    docker_gitlab_docker_compose_template: playbook_files/gitlab-compose-test.yml.j2
+    docker_gitlab_service_template: templates/gitlab-docker.service.j2
+    
+  roles:
+    - ansible-docker-gitlab

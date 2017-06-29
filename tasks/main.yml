@@ -1,0 +1,67 @@
+---
+- block:
+  - name: Create {{docker_gitlab_gitlab_rb_location}}
+    file:
+      path: "{{docker_gitlab_gitlab_rb_location}}"
+      state: directory
+
+  - name: Template and copy over the gitlab.rb over
+    template:
+      src: "{{ docker_gitlab_gitlab_rb_template }}"
+      dest: "{{ docker_gitlab_gitlab_rb_location }}/{{ docker_gitlab_gitlab_rb_file_name }}"
+      owner: root
+      group: root
+      mode: 0644
+  when: docker_gitlab_gitlab_rb_template|default("") != ""
+
+- block:
+  - name: Create {{docker_gitlab_runner_config_toml_location}}
+    file:
+      path: "{{docker_gitlab_runner_config_toml_location}}"
+      state: directory
+
+  - name: Template and copy over the gitlab-runner config.toml file
+    template:
+      src: "{{ docker_gitlab_runner_config_toml_template }}"
+      dest: "{{ docker_gitlab_runner_config_toml_location }}/{{ docker_gitlab_runner_config_toml_file_name }}"
+      owner: root
+      group: root
+      mode: 0644
+  when: docker_gitlab_runner_config_toml_template|default("") != ""
+
+- block:
+  - name: Create {{docker_gitlab_docker_compose_location}}
+    file:
+      path: "{{docker_gitlab_docker_compose_location}}"
+      state: directory
+
+  - name: Template and copy over the docker-compose file
+    template:
+      src: "{{ docker_gitlab_docker_compose_template }}"
+      dest: "{{ docker_gitlab_docker_compose_location }}/{{ docker_gitlab_docker_compose_file_name }}"
+      owner: root
+      group: root
+      mode: 0644
+  when: docker_gitlab_docker_compose_template|default("") != ""
+
+- block:
+  - name: Create {{docker_gitlab_service_location}}
+    file:
+      path: "{{docker_gitlab_service_location}}"
+      state: directory
+
+  - name: Template and copy over the systemd service file
+    template:
+      src: "{{ docker_gitlab_service_template }}"
+      dest: "{{ docker_gitlab_service_location }}/{{ docker_gitlab_service_name }}.service"
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Reload systemd
+    systemd:
+      state: reloaded
+      daemon_reload: yes
+      enabled: yes
+      name: "{{ docker_gitlab_service_name }}"
+  when: (docker_gitlab_service_template|default("") != "") and (ansible_service_mgr == "systemd")

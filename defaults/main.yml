@@ -1,0 +1,16 @@
+---
+# docker_gitlab_gitlab_rb_template: templates/gitlab.rb.j2
+docker_gitlab_gitlab_rb_location: /opt/gitlab
+docker_gitlab_gitlab_rb_file_name: gitlab.rb
+
+# docker_gitlab_runner_config_toml_template: templates/config.toml.j2
+docker_gitlab_runner_config_toml_location: /opt/gitlab-runner
+docker_gitlab_runner_config_toml_file_name: config.toml
+
+# docker_gitlab_docker_compose_template: templates/gitlab-compose.yml.j2
+docker_gitlab_docker_compose_location: /opt/compose-files/gitlab-docker
+docker_gitlab_docker_compose_file_name: gitlab-compose.yml
+
+# docker_gitlab_service_template: templates/gitlab-docker.service.j2
+docker_gitlab_service_location: /etc/systemd/system
+docker_gitlab_service_name: gitlab-docker

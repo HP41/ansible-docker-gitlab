@@ -1,0 +1,48 @@
+---
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      dist: trusty
+      sudo: required
+
+env:
+  - SITE=test-simple-playbook.yml
+
+before_install:
+  - sudo apt-get -y -qq update
+  - sudo apt-get -y -qq install aptitude
+
+install:
+  # Install Ansible.
+  - yes | pip install ansible
+ 
+  # Add ansible.cfg to pick up roles path.
+  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+
+script:
+  # Check the role/playbook's syntax.
+  - ansible-playbook -i tests/inventory tests/$SITE --syntax-check
+
+  # At the moment cannot work with systemd on TravisCI as it isnt' present on the trusty image.
+
+  # # Run the role/playbook with ansible-playbook. Creates NFS service.
+  # - script -q -c "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo -vvvv" output.txt
+
+  # - >
+  #   grep -q 'failed=0' output.txt
+  #   && (echo 'Role run: pass' && exit 0) 
+  #   || (echo 'Role run: fail' && exit 1)
+  
+  # - >
+  #   [[ -x "/opt/bin/docker-volume-netshare" ]] 
+  #   && (echo 'docker-volume-netshare exists and executable: pass' && exit 0) 
+  #   || (echo 'docker-volume-netshare exists and executable: fail' && exit 1)
+
+  # - >
+  #   [[ -e "/etc/systemd/system/docker-volume-netshare-nfs.service" ]] 
+  #   && (echo 'docker-volume-netshare-nfs.service exists: pass' && exit 0) 
+  #   || (echo 'docker-volume-netshare-nfs.service exists: fail' && exit 1)
+    
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

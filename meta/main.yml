@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  author: Hitesh Prabhakar
+  description: Ansible role to setup gitlab and/or gitlab-runner as docker container(s) through a docker compose file which is managed as a systemd unit thereafter.
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+     - name: Debian
+      versions:
+        - stretch
+        - jessie
+        - wheezy
+    - name: Ubuntu
+      versions:
+        - xenial
+        - trusty
+        - precise
+  galaxy_tags:
+    - docker
+    - gitlab
+    - gitlab-runner
+    - systemd
+
+dependencies: []

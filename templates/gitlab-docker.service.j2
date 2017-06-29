@@ -1,0 +1,12 @@
+[Unit]
+Description=Start gitlab-docker service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+ExecStart={{ docker_gitlab_docker_compose_location }} -f {{ docker_gitlab_docker_compose_location }} up
+ExecStop={{ docker_gitlab_docker_compose_location }} -f {{ docker_gitlab_docker_compose_location }} stop
+
+[Install]
+WantedBy=multi-user.target

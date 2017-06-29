@@ -38,37 +38,45 @@
     - trusty
     - precise
 
-### Default Variables that can be overridden or used as-is when using this role:
+## Default Variables that can be overridden or used as-is when using this role:
 
-- gitlab.rb
-    - `docker_gitlab_gitlab_rb_template`(*Optional*): Path to the `gitlab.rb` template file in context of the role/playbook.
-        - **The template processing and placing of gitlab.rb by THIS role will only happen if this variable is defined with a non-empty string**
-    - `docker_gitlab_gitlab_rb_location`: Folder where `gitlab.rb` should be placed in context of the host 
-        - Please ensure this location is mounted accordingly onto the container. Please check [gitlab-compose-example.yml](gitlab-compose-example.yml)
-        - Default=`/opt/gitlab`
-    - `docker_gitlab_gitlab_rb_file_name`: The filename for `gitlab.rb`. This is provided for flexibility 
-        - Default=`gitlab.rb`
-- gitlab-runner config.toml
-    - `docker_gitlab_runner_config_toml_template`(*Optional*): Path to the `config.toml` template file in context of the role/playbook.
-        - **The template processing and placing of config.toml by THIS role will only happen if this variable is defined with a non-empty string**
-    - `docker_gitlab_runner_config_toml_location`: Folder where `config.toml` should be placed in context of the host 
-        - Please ensure this location is mounted accordingly onto the container. Please check [gitlab-compose-example.yml](gitlab-compose-example.yml)
-        - Default=`/opt/gitlab-runner`
-    - `docker_gitlab_runner_config_toml_file_name`: The filename for `config.toml`. This is provided for flexibility 
-        - Default=`config.toml`
-- docker-compose
-    - `docker_gitlab_docker_compose_template`(*Optional*): Path to the **docker-compose yml** template file in context of the role/playbook.
-        - **The template processing and placing of docker-compose yml by THIS role will only happen if this variable is defined with a non-empty string**
-    - `docker_gitlab_docker_compose_location`: Folder where **docker-compose yml** should be placed in context of the host 
-        - Default=`/opt/compose-files/gitlab-docker`
-    - `docker_gitlab_docker_compose_file_name`: The filename for **docker-compose yml**. 
-        - Default=`gitlab-compose.yml`
-- docker-compose systemd unit
-    - `docker_gitlab_service_template`(*Optional*): Path to the **gitlab docker-compose systemd unit** template file in context of the role/playbook.
-        - **The template processing and placing of gitlab docker-compose systemd unit by THIS role will only happen if this variable is defined with a non-empty string**
-    - `docker_gitlab_service_location`: Folder where **gitlab docker-compose systemd unit** should be placed in context of the host 
-        - Default=`/etc/systemd/system`
-    - `docker_gitlab_service_name`: The **service name** for **gitlab docker-compose systemd unit**. 
-    - **Please note, this is the service name and not the systemd service file name**
-        - For eg: gitlab-docker *and NOT gitlab-docker.service* 
+#### gitlab.rb
+
+- `docker_gitlab_gitlab_rb_template`(*Optional*): Path to the `gitlab.rb` template file in context of the role/playbook.
+    - **The template processing and placing of gitlab.rb by THIS role will only happen if this variable is defined with a non-empty string**
+- `docker_gitlab_gitlab_rb_location`: Folder where `gitlab.rb` should be placed in context of the host 
+    - Please ensure this location is mounted accordingly onto the container. Please check [gitlab-compose-example.yml](gitlab-compose-example.yml)
+    - Default=`/opt/gitlab`
+- `docker_gitlab_gitlab_rb_file_name`: The filename for `gitlab.rb`. This is provided for flexibility 
+    - Default=`gitlab.rb`
+
+#### gitlab-runner config.toml
+
+- `docker_gitlab_runner_config_toml_template`(*Optional*): Path to the `config.toml` template file in context of the role/playbook.
+    - **The template processing and placing of config.toml by THIS role will only happen if this variable is defined with a non-empty string**
+- `docker_gitlab_runner_config_toml_location`: Folder where `config.toml` should be placed in context of the host 
+    - Please ensure this location is mounted accordingly onto the container. Please check [gitlab-compose-example.yml](gitlab-compose-example.yml)
+    - Default=`/opt/gitlab-runner`
+- `docker_gitlab_runner_config_toml_file_name`: The filename for `config.toml`. This is provided for flexibility 
+    - Default=`config.toml`
+
+#### docker-compose
+
+- `docker_gitlab_docker_compose_template`(*Optional*): Path to the **docker-compose file** template file in context of the role/playbook.
+    - **The template processing and placing of docker-compose file by THIS role will only happen if this variable is defined with a non-empty string**
+- `docker_gitlab_docker_compose_location`: Folder where **docker-compose file** should be placed in context of the host.
+    - Default=`/opt/compose-files/gitlab-docker`
+- `docker_gitlab_docker_compose_file_name`: The filename for **docker-compose file**. 
+    - Default=`gitlab-compose.yml`
+- `docker_gitlab_docker_compose_binary_full_path`: The full path to where the `docker-compose` binary is located.
+    - Default=`/opt/bin/docker-compose`
+
+#### systemd unit to run the above docker-compose file as a service
+- `docker_gitlab_service_template`(*Optional*): Path to the **gitlab docker-compose systemd unit** template file in context of the role/playbook.
+    - **The template processing and placing of gitlab docker-compose systemd unit by THIS role will only happen if this variable is defined with a non-empty string**
+- `docker_gitlab_service_location`: Folder where **gitlab docker-compose systemd unit** should be placed in context of the host .
+    - Default=`/etc/systemd/system`
+- `docker_gitlab_service_name`: The **service name** for **gitlab docker-compose systemd unit**. 
+- **Please note, this is the service name and not the systemd service file name**
+    - For eg: gitlab-docker *and NOT gitlab-docker.service* 
     - Default=`gitlab-docker`

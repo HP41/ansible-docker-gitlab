@@ -18,7 +18,6 @@ galaxy_info:
   galaxy_tags:
     - docker
     - gitlab
-    - gitlab-runner
     - systemd
 
 dependencies: []

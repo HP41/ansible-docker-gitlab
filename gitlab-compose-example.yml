@@ -24,7 +24,8 @@ services:
       echo 'config.toml foud, therefore it is already registered or config has been placed there';
       exit 0;
       else
-      echo 'config.toml not foud, registering';
+      echo 'config.toml not foud, waiting for 3min and registering';
+      sleep 3m;
       gitlab-runner register -n;
       fi"
     # Ensure the same volumes are used for the actual runner instance below

@@ -60,7 +60,7 @@
 
   - name: Reload systemd
     systemd:
-      state: reloaded
+      state: restarted
       daemon_reload: yes
       enabled: yes
       name: "{{ docker_gitlab_service_name }}"
